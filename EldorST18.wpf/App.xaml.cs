@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace EldorST18
+namespace EldorST18.wpf
 {
     /// <summary>
     /// Interaction logic for App.xaml

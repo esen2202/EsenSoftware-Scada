@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EldorST18.Properties
+namespace EldorST18.wpf.Properties
 {
 
 

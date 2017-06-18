@@ -20,97 +20,97 @@ namespace EldorST18.wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        core.DB db;
 
         public MainWindow()
         {
             InitializeComponent();
+            this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            using (db = new core.DB())
+
+        }
+
+        private void btn_close_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void bd_titleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+            if (e.ClickCount == 2)
             {
-                DG_Users.ItemsSource = db.GetUser();
+                btn_max_Click(sender, e);
             }
         }
 
-        private void btn_signIn(object sender, RoutedEventArgs e)
+        private void btn_max_Click(object sender, RoutedEventArgs e)
         {
-            db = new core.DB();
-            if (db.SignIn(txt_uName.Text, txt_uPass.Text))
+            if (this.WindowState == WindowState.Normal)
+                this.WindowState = WindowState.Maximized;
+            else
+                this.WindowState = WindowState.Normal;
+        }
+
+        private void btn_min_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == WindowState.Maximized)
             {
-                MessageBox.Show("Giriş Başarılı");
+
+            }
+        }
+
+
+        private void btn_addUserShow_Click(object sender, RoutedEventArgs e)
+        {
+            ContentUserControl(gd_content, new UserAdd());
+        }
+
+        private void btn_entryUserShow_Click(object sender, RoutedEventArgs e)
+        {
+            ContentUserControl(gd_content, new UserEntry());
+        }
+
+        private void btn_editUserShow_Click(object sender, RoutedEventArgs e)
+        {
+            ContentUserControl(gd_content, new UserEdit());
+        }
+
+        /// <summary>
+        /// Call User Control in Grid
+        /// </summary>
+        /// <param name="grid">Grid</param>
+        /// <param name="uc">UserControl</param>
+        private void ContentUserControl(Grid grid, UserControl uc)
+        {
+            if (grid.Children.Count > 0)
+            {
+                grid.Children.Clear();
+            }
+            grid.Children.Add(uc);
+        }
+
+        private void img_extendMenu_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            GridLength gl80 = new GridLength(80, GridUnitType.Pixel);
+            GridLength gl250 = new GridLength(250, GridUnitType.Pixel);
+
+            if (gc_sideMenu.Width == gl80)
+            {
+                gc_sideMenu.Width = gl250;
             }
             else
             {
-                MessageBox.Show("Hatalı Giriş");
+                gc_sideMenu.Width = gl80;
             }
-        }
-
-        private void btn_addUser_Click(object sender, RoutedEventArgs e)
-        {
-            string message = "";
-            model.User user = new model.User
-            {
-                UserName = txt_uName_new.Text,
-                UserPassword = txt_uPass_new.Text,
-                SuperUser = false,
-                Enable = true,
-                Authorization = 1,
-                Email = txt_eMail_new.Text,
-                Name = txt_name_new.Text,
-                SecondName = txt_secondName_new.Text,
-                Surname = txt_surname_new.Text,
-                Title = txt_title_new.Text,
-                Position = txt_position_new.Text,
-                PhotoAddress = "",
-                CardID = txt_cardID_new.Text,
-                DateTime = DateTime.Now
-            };
-
-            using (db = new core.DB())
-            {
-                var result = db.AddUser(user);
-                switch (result)
-                {
-                    case 1:
-                        message = "Successfull";
-                        break;
-                    case 0:
-                        message = "Error";
-                        break;
-                    case -1:
-                        message = "Same User already exist";
-                        break;
-
-                    default:
-                        break;
-                }
-            }
-            MessageBox.Show(message);
-        }
-
-        private void btn_getUser_Click(object sender, RoutedEventArgs e)
-        {
-            Grid_Loaded(sender, e);
-        }
-
-        private void DG_Users_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            model.User user = (model.User)DG_Users.SelectedItem;
-
-            txt_uName_new.Text = user.UserName;
-            txt_uPass_new.Text = user.UserPassword;
-            txt_name_new.Text = user.Name;
-            txt_secondName_new.Text = user.SecondName;
-            txt_surname_new.Text = user.Surname;
-            txt_title_new.Text = user.Title;
-            txt_position_new.Text = user.Position;
-            txt_eMail_new.Text = user.Email;
-            txt_cardID_new.Text = user.CardID;
-            
-
         }
     }
 }

@@ -1,34 +1,132 @@
 ﻿<Window x:Class="EldorST18.wpf.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:EldorST18.wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="377.386" Width="1022.788">
-    <Grid Loaded="Grid_Loaded">
-        <DataGrid HorizontalAlignment="Left" Height="194" Margin="10,142,0,0" VerticalAlignment="Top" Width="536" Name="DG_Users" MouseDoubleClick="DG_Users_MouseDoubleClick"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="120" Name="txt_uName"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,38,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="120" x:Name="txt_uPass"/>
-        <Button Content="Sign in" HorizontalAlignment="Left" Margin="10,66,0,0" VerticalAlignment="Top" Width="120" Click="btn_signIn"/>
+        Title="MainWindow" MinHeight="768" MinWidth="1366" WindowStartupLocation="CenterScreen" Width="1366" Height="768" 
+        AllowsTransparency="True" WindowStyle="None"  Background="{x:Null}" StateChanged="Window_StateChanged" Margin="10">
+    <!--Margin="7,7,5,9"-->
 
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="885,41,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="120" x:Name="txt_uName_new"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="885,69,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="120" x:Name="txt_uPass_new"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="885,98,0,0" TextWrapping="Wrap" Text="Email" VerticalAlignment="Top" Width="120" x:Name="txt_eMail_new"/>
+    <Border BorderThickness="0" BorderBrush="White" Margin="7,7,5,9">
 
-        <Label Content="New User" HorizontalAlignment="Left" Margin="885,8,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="885,137,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Width="120" x:Name="txt_name_new"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="885,195,0,0" TextWrapping="Wrap" Text="Surname" VerticalAlignment="Top" Width="120" x:Name="txt_surname_new"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="885,165,0,0" TextWrapping="Wrap" Text="Second Name" VerticalAlignment="Top" Width="120" x:Name="txt_secondName_new"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="885,223,0,0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" Width="120" x:Name="txt_title_new"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="885,251,0,0" TextWrapping="Wrap" Text="Position" VerticalAlignment="Top" Width="120" x:Name="txt_position_new"/>
-        <Button Content="Add Photo" HorizontalAlignment="Left" Margin="760,40,0,0" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="760,69,0,0" TextWrapping="Wrap" Text="Card ID" VerticalAlignment="Top" Width="120" x:Name="txt_cardID_new"/>
-        <Button Content="Add User" HorizontalAlignment="Left" Margin="885,311,0,0" VerticalAlignment="Top" Width="120" Name="btn_addUser" Click="btn_addUser_Click"/>
-        <ComboBox HorizontalAlignment="Left" Margin="885,279,0,0" VerticalAlignment="Top" Width="120" Name="cb_auth_new">
-            <ComboBoxItem>Deneme</ComboBoxItem>
-            <ComboBoxItem>Yeni</ComboBoxItem>
-        </ComboBox>
-        <Button Content="Get Users" HorizontalAlignment="Left" Height="30" Margin="459,107,0,0" VerticalAlignment="Top" Width="87" Name="btn_getUser" Click="btn_getUser_Click"/>
-    </Grid>
+        <!-- Window Grid -->
+        <Grid Name="gd_windowGrid" Loaded="Grid_Loaded" Margin="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" Name="gc_sideMenu"/>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Left Side -->
+            <Grid Name="gd_LeftSide" Grid.Row="0" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="250" />
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="150"/>
+                </Grid.RowDefinitions>
+                <!-- Top Border-->
+                <Border  BorderThickness="0,0,0,0" Background="#413f44" Grid.Column="0" Grid.Row="0" >
+                    <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left">
+                        <StackPanel  Margin="5,0,0,0" VerticalAlignment="Center" Visibility="Hidden">
+                            <Rectangle Width="20" Height="4"  Stretch="Fill" Fill="#FFDADADA" RadiusX="1" RadiusY="1" Margin="0,0,0,2"/>
+                            <Rectangle Width="20" Height="4"  Stretch="Fill" Fill="#FFDADADA" RadiusX="1" RadiusY="1" Margin="0,0,0,2"/>
+                            <Rectangle Width="20" Height="4"  Stretch="Fill" Fill="#FFDADADA" RadiusX="1" RadiusY="1" />
+                        </StackPanel>
+                        <Label Content="Scada" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" />
+                    </DockPanel>
+                </Border>
+
+
+                <!-- Profile Border -->
+                <Border BorderThickness="0,0,0,0" Background="#413f44" Grid.Column="0" Grid.Row="1" Height="250" VerticalAlignment="Top" >
+                    <StackPanel>
+
+                    </StackPanel>
+                </Border>
+
+                <!-- Menu Border -->
+                <Border BorderThickness="0,0,0,0" Grid.Column="0" Grid.Row="2" Background="#413F44"/>
+
+                <!-- Comm Border -->
+                <Border BorderThickness="0,0,0,0" Background="#333333" Grid.Column="0" Grid.Row="3"  >
+
+                </Border>
+
+            </Grid>
+
+            <!-- Rigt Side -->
+            <Grid Name="gd_rightSide" Grid.Column="1" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.Effect>
+                    <DropShadowEffect BlurRadius="7" Direction="270" RenderingBias="Quality" ShadowDepth="1"/>
+                </Grid.Effect>
+
+                <!-- Main Top -->
+                <!-- Main Top -->
+                <Border Background="#413f44" Grid.Row="0" x:Name="bd_titleBar" MouseLeftButtonDown="bd_titleBar_MouseLeftButtonDown"  Opacity="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="41" Style="{DynamicResource extendButton}" Name="img_extendMenu"
+                               RenderTransformOrigin="0.5,0.5" Source="Img/icon/Ellipsis Filled-50.png" Margin="10,0,0,0" Grid.Column="0" MouseDown="img_extendMenu_MouseDown"/>
+                        <Label Content="Scada Program" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="16"/>
+                        <DockPanel HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="2">
+
+                            <Button HorizontalAlignment="Right" Width="40" Style="{DynamicResource WindowControlButton}" x:Name="btn_min" Click="btn_min_Click">
+                                <Path Data="M0,0 L1,0 " Stretch="Fill" Stroke="White" Margin="14,20,14,10" StrokeThickness="1"/>
+                            </Button>
+                            <Button HorizontalAlignment="Right" Width="40" Style="{DynamicResource WindowControlButton}" x:Name="btn_max"   Click="btn_max_Click">
+                                <Rectangle Width="10" Height="10" Stretch="Fill" StrokeThickness="1"  Stroke="White"/>
+                            </Button>
+                            <Button HorizontalAlignment="Right" Width="40" Style="{DynamicResource WindowCloseButton}" x:Name="btn_close"  Click="btn_close_Click" Margin="0,0,0,0">
+                                <Path Data="M0,0 L1,1 M0,1 L1,0" Stretch="Fill" Stroke="White" Margin="14,11" StrokeThickness="1"/>
+                            </Button>
+                        </DockPanel>
+                    </Grid>
+                </Border>
+
+                <Border Background="#ffffff" Grid.Row="1"  MouseLeftButtonDown="bd_titleBar_MouseLeftButtonDown">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <DockPanel Grid.Row="1">
+                            <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="37" Source="Img/icon/Left_50.png" Style="{DynamicResource extendButton}" Name="img_backGo"/>
+                            <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="37" Source="Img/icon/Right_50.png" Style="{DynamicResource extendButton}" Name="img_forwardGo"/>
+                            <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="37" Source="Img/icon/Reset-32.png" Style="{DynamicResource extendButton}" Name="img_reset"/>
+                        </DockPanel>
+
+
+                        <DockPanel Margin="10" Grid.Column="1" Grid.RowSpan="2">
+                            <Button Width="100" Height="30" Style="{DynamicResource GlassButton}" Content="Add User" Name="btn_addUserShow" Click="btn_addUserShow_Click" />
+                            <Button Width="100" Height="30" Style="{DynamicResource GlassButton}" Content="Entry User" Name="btn_entryUserShow" Click="btn_entryUserShow_Click" />
+                            <Button Width="100" Height="30" Style="{DynamicResource GlassButton}" Content="Edit User" Name="btn_editUserShow" Click="btn_editUserShow_Click" />
+                        </DockPanel>
+                    </Grid>
+
+                </Border>
+
+                <!-- Main Body -->
+                <Border Background="#f9f9f9" Grid.Row="2" d:IsLocked="True"/>
+                <Grid x:Name="gd_content" Grid.Row="2" Margin="10"/>
+
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

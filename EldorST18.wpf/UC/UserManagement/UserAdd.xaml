@@ -13,7 +13,7 @@
                 <RowDefinition Height="33*"/>
                 <RowDefinition Height="415*"/>
             </Grid.RowDefinitions>
-        <Border BorderThickness="0,0,0,0" BorderBrush="White" Margin="0"  Background="#FF1F7EAA" Effect="{DynamicResource z-depth2}" Grid.RowSpan="2"/>
+        <Border BorderThickness="0,0,0,0" BorderBrush="White" Margin="0"  Background="#FF1F7EAA" Effect="{DynamicResource z-depth1}" Grid.RowSpan="2"/>
 
         <TextBox HorizontalAlignment="Left" Height="23" Margin="10,11,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="120" x:Name="txt_uName_new" Grid.Row="1"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="10,39,0,0" TextWrapping="Wrap" Text="Password" VerticalAlignment="Top" Width="120" x:Name="txt_uPass_new" Grid.Row="1"/>

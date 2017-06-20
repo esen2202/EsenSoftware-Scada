@@ -3,54 +3,168 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EldorST18.wpf.Classes.Converters"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="768" MinWidth="1366" WindowStartupLocation="CenterScreen" Width="1366" Height="768" 
-        AllowsTransparency="True" WindowStyle="None"  Background="{x:Null}" StateChanged="Window_StateChanged" Margin="10">
-    <!--Margin="7,7,5,9"-->
+        Title="MainWindow" MinHeight="768" MinWidth="1366" WindowStartupLocation="CenterScreen" Width="750" Height="768" 
+        AllowsTransparency="True" WindowStyle="None"  Background="{x:Null}" StateChanged="Window_StateChanged" Margin="10" 
+        Icon="Img/Icons/Electrical Sensor-64.png" ResizeMode="CanResize">
+    <Window.Resources>
+        <local:SideBarVisibilityConverter x:Key="SideBarVisibilityConverter" />
+        <local:SideBarVisibilityReverseConverter x:Key="SideBarVisibilityReverseConverter" />
+        <local:SideBarBooleanConverter x:Key="SideBarBooleanConverter" />
+        <local:SideBarRotateConverter x:Key="SideBarRotateConverter" />
+        <local:SideBarOrientationConverter x:Key="SideBarOrientationConverter" />
+    </Window.Resources>
 
     <Border BorderThickness="0" BorderBrush="White" Margin="7,7,5,9">
 
         <!-- Window Grid -->
         <Grid Name="gd_windowGrid" Loaded="Grid_Loaded" Margin="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" Name="gc_sideMenu"/>
+                <ColumnDefinition Width="250" Name="gc_sideMenu"/>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             <!-- Left Side -->
             <Grid Name="gd_LeftSide" Grid.Row="0" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="250" />
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="150"/>
                 </Grid.RowDefinitions>
                 <!-- Top Border-->
-                <Border  BorderThickness="0,0,0,0" Background="#413f44" Grid.Column="0" Grid.Row="0" >
-                    <DockPanel VerticalAlignment="Center" HorizontalAlignment="Left">
-                        <StackPanel  Margin="5,0,0,0" VerticalAlignment="Center" Visibility="Hidden">
-                            <Rectangle Width="20" Height="4"  Stretch="Fill" Fill="#FFDADADA" RadiusX="1" RadiusY="1" Margin="0,0,0,2"/>
-                            <Rectangle Width="20" Height="4"  Stretch="Fill" Fill="#FFDADADA" RadiusX="1" RadiusY="1" Margin="0,0,0,2"/>
-                            <Rectangle Width="20" Height="4"  Stretch="Fill" Fill="#FFDADADA" RadiusX="1" RadiusY="1" />
-                        </StackPanel>
-                        <Label Content="Scada" Foreground="White" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" />
-                    </DockPanel>
+                <Border  BorderThickness="0,0,0,0" Background="#413f44" Grid.Row="0" >
+                    <WrapPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                        <Image HorizontalAlignment="Left" Height="41" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="51" Source="Img/Icons/Electrical Sensor-64.png"  Name="img_icon"/>
+                        <Label Content="Esen Software" Foreground="#FF45A5DC" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" FontSize="14" Margin="10,0,0,0" FontStyle="Italic"/>
+                    </WrapPanel>
                 </Border>
 
-
                 <!-- Profile Border -->
-                <Border BorderThickness="0,0,0,0" Background="#413f44" Grid.Column="0" Grid.Row="1" Height="250" VerticalAlignment="Top" >
-                    <StackPanel>
+                <Border BorderThickness="0" Grid.Row="1" Opacity="0.98" Margin="0" Padding="0">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform Angle="-2" CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF413F44" Offset="0"/>
+                            <GradientStop Color="#FF2A3B4B" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <!-- Wide Menu -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                        </Grid>
 
-                    </StackPanel>
+                        <StackPanel Grid.Column="0" Margin="0"  >
+                            <Image Source="Img/Icons/Login-64.png" Width="32" HorizontalAlignment="Left" Margin="20,10" Style="{DynamicResource extendButton}" />
+                            <Image Source="Img/Icons/Logout Rounded Left-64.png" Width="32" HorizontalAlignment="Right" Margin="20,10" Style="{DynamicResource extendButton}"/>
+                            <Image Source="Img/Icons/Admin Settings Male-64.png" Width="32" HorizontalAlignment="Right" Margin="20,10" Style="{DynamicResource extendButton}"/>
+                        </StackPanel>
+                        <StackPanel  Grid.Column="1" HorizontalAlignment="Center"
+                                 Visibility="{Binding Width, Converter={StaticResource SideBarVisibilityConverter}, ElementName=gc_sideMenu}">
+                            <Ellipse Margin="20,0" Width="100" Height="100" StrokeThickness="1" Stroke="#413f44" Grid.Row="0">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="Img/Icons/user-Profil-Image.png" Stretch="Fill"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Label Content="Anonymous" Foreground="White" HorizontalAlignment="Center"  VerticalAlignment="Top" Grid.Row="1" />
+                            <Label Content="Administrator" Foreground="#FF9EE20E" HorizontalAlignment="Center" FontWeight="Bold" VerticalAlignment="Top" Grid.Row="2" />
+                        </StackPanel>
+                    </Grid>
                 </Border>
 
                 <!-- Menu Border -->
-                <Border BorderThickness="0,0,0,0" Grid.Column="0" Grid.Row="2" Background="#413F44"/>
+                <Border BorderThickness="0" Grid.Row="2" Opacity="0.98" Padding="0,20,0,0">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <LinearGradientBrush.RelativeTransform>
+                                <TransformGroup>
+                                    <ScaleTransform CenterY="0.5" CenterX="0.5"/>
+                                    <SkewTransform CenterY="0.5" CenterX="0.5"/>
+                                    <RotateTransform CenterY="0.5" CenterX="0.5"/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FF2A3B4B" Offset="0"/>
+                            <GradientStop Color="#FF2A3B4B" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <!-- Side Menu  Content -->
+                    <StackPanel>
+                        <RadioButton GroupName="Menu" Height="50" x:Name="mbtn_userEntry"  Style="{DynamicResource ToggleButtonStyle1}"  Padding="0,10,0,0" Margin="0,0,0,1" Click="btn_entryUserShow_Click">
+                            <DockPanel Width="220" Margin="25,0,0,0">
+                                <Image Source="Img/Icons/Login-64.png" Width="32"/>
+                                <Label Content="User Entry" Foreground="White" FontSize="16" x:Name="lbl_userEntry" Margin="17,0,0,0"/>
+                            </DockPanel>
+                        </RadioButton>
+                        <RadioButton GroupName="Menu" Height="50" x:Name="mbtn_userManagement"  Style="{DynamicResource ToggleButtonStyle1}" Padding="0,10,0,0" Margin="0,0,0,1"  Click="btn_addUserShow_Click">
+                            <DockPanel Width="220" Margin="25,0,0,0">
+                                <Image Source="Img/Icons/customer-64.png" Width="32"/>
+                                <Label Content="User Management" Foreground="White" FontSize="16" x:Name="lbl_userMan" Margin="17,0,0,0"/>
+                            </DockPanel>
+                        </RadioButton>
+                        <RadioButton GroupName="Menu" Height="50" x:Name="mbtn_userList"  Style="{DynamicResource ToggleButtonStyle1}" Padding="0,10,0,0" Margin="0,0,0,1"  Click="btn_editUserShow_Click">
+                            <DockPanel Width="220" Margin="25,0,0,0">
+                                <Image Source="Img/Icons/User Menu Male-64.png" Width="32"/>
+                                <Label Content="User List" Foreground="White" FontSize="16" x:Name="lbl_userList" Margin="17,0,0,0"/>
+                            </DockPanel>
+                        </RadioButton>
+                        <RadioButton GroupName="Menu" Height="50" x:Name="mbtn_settings"  Style="{DynamicResource ToggleButtonStyle1}" Padding="0,10,0,0" Margin="0,0,0,1"  Click="btn_addUserShow_Click">
+                            <DockPanel Width="220" Margin="25,0,0,0">
+                                <Image Source="Img/Icons/Toggle On-64.png" Width="32"/>
+                                <Label Content="Settings" Foreground="White" FontSize="16" x:Name="lbl_settings" Margin="17,0,0,0"/>
+                            </DockPanel>
+                        </RadioButton>
+                        <RadioButton GroupName="Menu" Height="50" x:Name="mbtn_reporting"  Style="{DynamicResource ToggleButtonStyle1}" Padding="0,10,0,0" Margin="0,0,0,1" Click="mbtn_reporting_Click" >
+                            <DockPanel Width="220" Margin="25,0,0,0">
+                                <Image Source="Img/Icons/Report Card-64.png" Width="32"/>
+                                <Label Content="Reporting" Foreground="White" FontSize="16" x:Name="lbl_reporting" Margin="17,0,0,0"/>
+                            </DockPanel>
+                        </RadioButton>
+                    </StackPanel>
+
+                </Border>
 
                 <!-- Comm Border -->
-                <Border BorderThickness="0,0,0,0" Background="#333333" Grid.Column="0" Grid.Row="3"  >
+                <Border BorderThickness="0,0,0,0" Background="#333333"  Grid.Row="3" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20*"  />
+                            <RowDefinition Height="39*"  />
+                            <RowDefinition Height="16*" />
+                        </Grid.RowDefinitions>
 
+
+                        <Border Grid.Row="0" >
+                            <DockPanel HorizontalAlignment="Center">
+                                <Label Content="PLC Communications" Foreground="#FF5888DC"   />
+                            </DockPanel>
+                        </Border>
+                        
+                        <Border Grid.Row="2" >
+                            <DockPanel HorizontalAlignment="Center">
+                                <Label Content="Address : " Foreground="#FF5888DC"   />
+                                <Label Content="192.168.2.7" Foreground="#FF999999"/>
+                            </DockPanel>
+                        </Border>
+
+                    </Grid>
                 </Border>
 
             </Grid>
@@ -67,7 +181,6 @@
                 </Grid.Effect>
 
                 <!-- Main Top -->
-                <!-- Main Top -->
                 <Border Background="#413f44" Grid.Row="0" x:Name="bd_titleBar" MouseLeftButtonDown="bd_titleBar_MouseLeftButtonDown"  Opacity="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -75,12 +188,16 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
-
-                        <Image HorizontalAlignment="Left" Height="35" VerticalAlignment="Top" Width="41" Style="{DynamicResource extendButton}" Name="img_extendMenu"
-                               RenderTransformOrigin="0.5,0.5" Source="Img/icon/Ellipsis Filled-50.png" Margin="10,0,0,0" Grid.Column="0" MouseDown="img_extendMenu_MouseDown"/>
+                        <Image HorizontalAlignment="Left" Height="35" VerticalAlignment="Center" Width="27" Style="{DynamicResource extendButton}" Name="img_extendMenu"
+                               RenderTransformOrigin="0.5,0.5" Source="Img/Icons/Menu-64.png" Margin="10,0,0,0" Grid.Column="0" MouseDown="img_extendMenu_MouseDown">
+                            <Image.Triggers>
+                                <EventTrigger RoutedEvent="Image.MouseRightButtonUp">
+                                    <BeginStoryboard Storyboard="{DynamicResource sb_menuShowIconRotate}"/>
+                                </EventTrigger>
+                            </Image.Triggers>
+                        </Image>
                         <Label Content="Scada Program" Grid.Column="1"  HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="16"/>
                         <DockPanel HorizontalAlignment="Right" Margin="0,0,5,0" Grid.Column="2">
-
                             <Button HorizontalAlignment="Right" Width="40" Style="{DynamicResource WindowControlButton}" x:Name="btn_min" Click="btn_min_Click">
                                 <Path Data="M0,0 L1,0 " Stretch="Fill" Stroke="White" Margin="14,20,14,10" StrokeThickness="1"/>
                             </Button>
@@ -94,7 +211,7 @@
                     </Grid>
                 </Border>
 
-                <Border Background="#ffffff" Grid.Row="1"  MouseLeftButtonDown="bd_titleBar_MouseLeftButtonDown">
+                <Border Background="#ffffff" Grid.Row="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -106,17 +223,28 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
 
-                        <DockPanel Grid.Row="1">
-                            <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="37" Source="Img/icon/Left_50.png" Style="{DynamicResource extendButton}" Name="img_backGo"/>
-                            <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="37" Source="Img/icon/Right_50.png" Style="{DynamicResource extendButton}" Name="img_forwardGo"/>
-                            <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="37" Source="Img/icon/Reset-32.png" Style="{DynamicResource extendButton}" Name="img_reset"/>
+                        <!-- Col 0 Row 0 -->
+                        <DockPanel Margin="10,0" Grid.Column="0" Grid.Row="0">
+                            <Label Content="Scada Program Test V1.0" Foreground="#030303" FontWeight="Thin" />
                         </DockPanel>
-
-
+                        <!-- Col 0 Row 1 -->
+                        <DockPanel Grid.Row="1">
+                            <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="37" Source="Img/Icons/Left_50.png" Style="{DynamicResource extendButton}" Name="img_backGo"/>
+                            <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="37" Source="Img/Icons/Right_50.png" Style="{DynamicResource extendButton}" Name="img_forwardGo"/>
+                            <Image HorizontalAlignment="Left" Height="30" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="37" Source="Img/Icons/Reset-32.png" Style="{DynamicResource extendButton}" Name="img_reset"/>
+                        </DockPanel>
+                        <!-- Col 1 Row 0 RowSpan 2 -->
                         <DockPanel Margin="10" Grid.Column="1" Grid.RowSpan="2">
-                            <Button Width="100" Height="30" Style="{DynamicResource GlassButton}" Content="Add User" Name="btn_addUserShow" Click="btn_addUserShow_Click" />
-                            <Button Width="100" Height="30" Style="{DynamicResource GlassButton}" Content="Entry User" Name="btn_entryUserShow" Click="btn_entryUserShow_Click" />
-                            <Button Width="100" Height="30" Style="{DynamicResource GlassButton}" Content="Edit User" Name="btn_editUserShow" Click="btn_editUserShow_Click" />
+
+                        </DockPanel>
+                        <!-- Col 2 Row 0 -->
+                        <DockPanel Grid.Column="2" Grid.Row="1" HorizontalAlignment="Right">
+                            <Image Source="Img/Icons/Contacts-32.png" Width="32" Margin="0,0,5,0" Stretch="None" Style="{DynamicResource extendButton}"/>
+                        </DockPanel>
+                        <!-- Col 2 Row 1 -->
+                        <DockPanel Grid.Column="2" Grid.Row="0" HorizontalAlignment="Right">
+                            <Label Content="-" Name="lb_date" FontSize="16" FontWeight="Thin" Margin="0,0,5,0"/>
+                            <Label Content="00:00:00" Name="lb_time" FontSize="16" FontWeight="Bold" Margin="0,0,5,0"/>
                         </DockPanel>
                     </Grid>
 
@@ -124,8 +252,9 @@
 
                 <!-- Main Body -->
                 <Border Background="#f9f9f9" Grid.Row="2" d:IsLocked="True"/>
-                <Grid x:Name="gd_content" Grid.Row="2" Margin="10"/>
-
+                <Grid x:Name="gd_content" Grid.Row="2" Margin="10">
+                    <WrapPanel x:Name="wp_content" Margin="0,0,0,0"/>
+                </Grid>
             </Grid>
         </Grid>
     </Border>

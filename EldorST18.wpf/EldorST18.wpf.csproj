@@ -43,6 +43,12 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Controls.Input.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\System.Windows.Controls.Input.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Layout.Toolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\System.Windows.Controls.Layout.Toolkit.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,19 +61,27 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit, Version=3.5.40128.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Infragistics.Themes.MetroDark.Wpf.1.0.0\lib\net40\WPFToolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="UserAdd.xaml.cs">
+    <Compile Include="Classes\Converters1.cs" />
+    <Compile Include="Classes\Converters\SideBarViewConverter.cs" />
+    <Compile Include="UC\Report\Reporting.xaml.cs">
+      <DependentUpon>Reporting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UserManagement\UserAdd.xaml.cs">
       <DependentUpon>UserAdd.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserEdit.xaml.cs">
+    <Compile Include="UC\UserManagement\UserEdit.xaml.cs">
       <DependentUpon>UserEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserEntry.xaml.cs">
+    <Compile Include="UC\UserManagement\UserEntry.xaml.cs">
       <DependentUpon>UserEntry.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
@@ -82,19 +96,67 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Style\Animation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Style\Style.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserAdd.xaml">
+    <Page Include="Themes\MetroDark\MetroDark.MSControls.Core.Implicit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroDark\MetroDark.MSControls.Toolkit.Implicit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroDark\Styles.Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroDark\Styles.WPF.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MetroDark\Theme.Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Metro\Metro.MSControls.Core.Implicit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Metro\Metro.MSControls.Toolkit.Implicit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Metro\Styles.Shared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Metro\Styles.WPF.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Metro\Theme.Colors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UC\Report\Reporting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserEdit.xaml">
+    <Page Include="UC\UserManagement\UserAdd.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserEntry.xaml">
+    <Page Include="UC\UserManagement\UserEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UC\UserManagement\UserEntry.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,22 +201,70 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Img\database\" />
-    <Folder Include="Img\default\" />
-    <Folder Include="UC\" />
+    <Folder Include="Img\Database\" />
+    <Folder Include="Img\Default\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\icon\Ellipsis Filled-50.png" />
+    <Resource Include="Img\Icons\Ellipsis Filled-50.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\icon\Left_50.png" />
-    <Resource Include="Img\icon\Right_50.png" />
+    <Resource Include="Img\Icons\Left_50.png" />
+    <Resource Include="Img\Icons\Right_50.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\icon\Reset-64.png" />
+    <Resource Include="Img\Icons\Reset-64.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Img\icon\Reset-32.png" />
+    <Resource Include="Img\Icons\Reset-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\Metro\HowToApplyTheme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\MetroDark\HowToApplyTheme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\customer-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\Edit User Male-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\User Menu Male-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\Available Updates-64.png" />
+    <Resource Include="Img\Icons\Login-64.png" />
+    <Resource Include="Img\Icons\Toggle On-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\user-Profil-Image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\Menu-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\Report Card-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\Contacts-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\Login-64 Black.png" />
+    <Resource Include="Img\Icons\Logout Rounded Left-64 Black.png" />
+    <Resource Include="Img\Icons\Logout Rounded Left-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\Electrical Sensor-32.png" />
+    <Resource Include="Img\Icons\Electrical Sensor-64.png" />
+    <Resource Include="Img\Icons\Electrical Sensor-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\Services-64.png" />
+    <Resource Include="Img\Icons\Settings-64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Img\Icons\Admin Settings Male-64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

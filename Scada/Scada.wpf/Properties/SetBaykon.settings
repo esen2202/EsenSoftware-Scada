@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Scada.wpf.Properties" GeneratedClassName="SetBaykon">
+  <Profiles />
+  <Settings>
+    <Setting Name="TEA99_IP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.5.100</Value>
+    </Setting>
+    <Setting Name="DMS_IP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.5.101</Value>
+    </Setting>
+    <Setting Name="TEA99_Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">502</Value>
+    </Setting>
+    <Setting Name="DMS_Port" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">502</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

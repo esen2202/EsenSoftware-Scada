@@ -1,0 +1,81 @@
+﻿<UserControl xmlns:UserManagement="clr-namespace:Scada.wpf.Pages.UserControls.UserManagement"  
+             x:Class="Scada.wpf.Pages.UserControls.UserManagement.UserEdit"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d"  Loaded="UC_EditUser_Loaded"
+             Width="700" Height="auto" 
+             Name="UC_EditUser" >
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="UserControl.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+                    <!--<DoubleAnimation Storyboard.TargetProperty="Width" From="0" To="300" Duration="0:0:1" />-->
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:0.5" >
+                        <DoubleAnimation.EasingFunction>
+                            <ExponentialEase EasingMode="EaseOut"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid Margin="5,0,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2"/>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+       
+        <Border x:Name="bd_MainBorder"  Grid.Row="1" Grid.RowSpan="2"  Background="White" CornerRadius="0,0,5,5" BorderBrush="#FFE0E0E0"  BorderThickness="1,0,1,1" HorizontalAlignment="Right" Width="690" Effect="{StaticResource z-depth1}"/>
+        <Border  Grid.Row="0"  Background="White" CornerRadius="0,0,5,5" BorderBrush="#FFE0E0E0"  BorderThickness="1,0,1,0"  Width="690"/>
+        <TabControl x:Name="CheckoutTabControl" Grid.Row="1" BorderThickness="0" Margin="0" Height="auto" VerticalAlignment="Top"
+                    TabStripPlacement="{Binding SelectedItem, ElementName=DockComboBox}"
+                    Style="{DynamicResource WizardTabControlStyle}">
+
+            <TabItem Style="{DynamicResource WizardFirstTabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>EDIT MY PROFILE</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <Grid Name="gd_EditMyProfile" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+            </TabItem>
+
+            <TabItem Style="{DynamicResource WizardTabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>EDIT OTHER USERS</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+
+                <Grid Name="gd_EditOtherUser" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+            </TabItem>
+
+
+            <TabItem Style="{DynamicResource WizardLastTabItemStyle}">
+                <TabItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock>CREATE NEW USER</TextBlock>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid Name="gd_CreateNewUser" HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+            </TabItem>
+
+        </TabControl>
+        <DockPanel Grid.Row="2">
+            <Image  x:Name="img_CloseBtn" Source="/Scada.wpf;component/Assets/img/icons/b-Multiply-32.png"  Style="{DynamicResource extendButton}"
+                   HorizontalAlignment="Right" Margin="15,5,15,15"  Width="26" Height="26"  MouseDown="Img_CloseBtn_MouseDown" Cursor="Hand"   >
+                <Image.ToolTip>
+                    <ToolTip Background="#D5F0F0FF">
+                        <Label Content="Exit" />
+                    </ToolTip>
+                </Image.ToolTip>
+            </Image>
+        </DockPanel>
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,180 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scada.wpf.Pages.UserControls.UserManagement"
+             xmlns:User="clr-namespace:Scada.wpf.Classes.User" x:Class="Scada.wpf.Pages.UserControls.UserManagement.EditUsers"
+             mc:Ignorable="d" 
+              Height="400" Width="570" x:Name="UC_EditUsers" Loaded="UC_EditUsers_Loaded"  >
+    <UserControl.Resources>
+        <User:AuthLevelToNameConverter x:Key="AuthLevelToNameConverter"/>
+    </UserControl.Resources>
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+            <BeginStoryboard>
+                <Storyboard>
+
+                    <DoubleAnimation Storyboard.TargetProperty="Opacity" From="0.0" To="1.0" Duration="0:0:0.2" >
+                        <DoubleAnimation.EasingFunction>
+                            <ExponentialEase EasingMode="EaseOut"/>
+                        </DoubleAnimation.EasingFunction>
+                    </DoubleAnimation>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+
+    <Grid x:Name="gd_MainGrid" Margin="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border x:Name="bd_MainBorder"  Background="White" CornerRadius="0,0,5,5" BorderBrush="#FFE0E0E0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+
+        <DockPanel  VerticalAlignment="Center" Grid.Column="1" >
+            <ComboBox x:Name="cb_users" VerticalAlignment="Center"  Height="40" Width="360" SelectedValuePath="User_ID" SelectionChanged="Bb_users_SelectionChanged">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Center" Width="360">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="{Binding Authorization, Converter={StaticResource AuthLevelToNameConverter}}" Grid.Column="0" Foreground="#FF75A808" HorizontalAlignment="Left" FontSize="15" FontWeight="Medium" VerticalAlignment="Top"  />
+                            <Label Content="{Binding UserName}" Grid.Column="1"  Foreground="#030303" FontSize="15" FontWeight="Thin" HorizontalAlignment="Left"  VerticalAlignment="Top" />
+                            <TextBlock Grid.Column="0" Text="{Binding User_ID}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5" Visibility="Collapsed"/>
+                        </Grid>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </DockPanel>
+        <!-- Left Panel -->
+        <Image Source="/Scada.wpf;component/Assets/img/icons/b-User Groups-96.png" Margin="0,0"
+               Grid.Column="0" Grid.Row="1" Width="96" Height="auto" VerticalAlignment="Top" Opacity="0.8"/>
+        <!--- Right Panel Register Form -->
+        <DockPanel Grid.Row="0"  Grid.Column="1" VerticalAlignment="Center"   Visibility="Collapsed">
+            <Button HorizontalAlignment="Right" Width="40" Height="35" Style="{DynamicResource extendButton2}" x:Name="btn_close"  Margin="0,0,1,0" Background="White" BorderThickness="0">
+                <Path Data="M0,0 L1,1 M0,1 L1,0" Stretch="Fill" Stroke="#FF666666" Margin="14,11" StrokeThickness="2"/>
+            </Button>
+        </DockPanel>
+
+        <WrapPanel Name="wp_editPanel" Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="10,0,10,0" IsEnabled="False">
+            <!--- User Name -->
+            <StackPanel x:Name="sp_UName" Width="200">
+                <DockPanel x:Name="dp_UName" HorizontalAlignment="Right">
+                    <Label Content="username" FontSize="12" HorizontalAlignment="Right" Foreground="#FF00AADE" Margin="0"/>
+                    <Label Content="*" FontSize="12" HorizontalAlignment="Right" VerticalAlignment="Bottom" Foreground="#FFDE0000"   FontWeight="Bold" Margin="0,0,20,0"/>
+                </DockPanel>
+                <TextBox x:Name="txt_uName_new"  Text="{Binding  UserName}" VerticalAlignment="Top" Height="23" TextAlignment="Center" Margin="20,0" MouseLeave="OnMouseCaptureLost" />
+            </StackPanel>
+            <!--- Current Password - for User Update -->
+            <StackPanel x:Name="sp_CurrentPass" Width="200" >
+                <DockPanel x:Name="dp_CurrentPass" HorizontalAlignment="Right" >
+                    <Label Content="your password for security " FontSize="12" HorizontalAlignment="Right" Foreground="#FF00AADE" Margin="0"/>
+                    <Label Content="*" FontSize="12" Foreground="#FFDE0000" Margin="0,0,20,0" FontWeight="Bold" HorizontalAlignment="Right"/>
+                </DockPanel>
+                <PasswordBox  x:Name="txt_CurrentUPass_new" Height="23"   VerticalAlignment="Top" HorizontalContentAlignment="Center" Margin="20,0" MouseLeave="OnMouseCaptureLost" />
+            </StackPanel>
+            <!--- Password -->
+            <StackPanel x:Name="sp_Pass" Width="200">
+                <DockPanel x:Name="dp_Pass">
+                    <Label Content="*" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FFDE0000" Margin="20,0" FontWeight="Bold" Visibility="Collapsed"/>
+                    <Label Content="new password" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FF00AADE" Margin="20,0"/>
+                </DockPanel>
+                <PasswordBox x:Name="txt_uPass_new" Height="23"   VerticalAlignment="Top" HorizontalContentAlignment="Center" Margin="20,0" MouseLeave="OnMouseCaptureLost" />
+            </StackPanel>
+
+            <!--- Re-Password -->
+            <StackPanel x:Name="sp_RuPass" Width="200">
+                <DockPanel x:Name="dp_RuPass">
+                    <Label Content="*" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FFDE0000" Margin="20,0" FontWeight="Bold" Visibility="Collapsed"/>
+                    <Label Content="re-new password" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FF00AADE" Margin="20,0"/>
+                </DockPanel>
+                <PasswordBox  x:Name="txt_RuPass_new" Height="23"   VerticalAlignment="Top" HorizontalContentAlignment="Center" Margin="20,0" MouseLeave="OnMouseCaptureLost" />
+            </StackPanel>
+            <!--- Authorized -->
+            <StackPanel x:Name="sp_Authorized" Width="200">
+                <DockPanel x:Name="dp_Authorized" HorizontalAlignment="Right" >
+                    <Label Content="authorization" FontSize="12" HorizontalAlignment="Right" Foreground="#FF00AADE" Margin="0"/>
+                    <Label Content="*" FontSize="12" Foreground="#FFDE0000" Margin="0,0,20,0" FontWeight="Bold" HorizontalAlignment="Right"/>
+                </DockPanel>
+                <ComboBox x:Name="cb_auth_new" Margin="20,0" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Height="22" SelectedValuePath="Value" DisplayMemberPath="Key" SelectedValue="{Binding Authorization}"/>
+            </StackPanel>
+            <!--- Email -->
+            <StackPanel x:Name="sp_eMail" Width="200" >
+                <DockPanel x:Name="dp_eMail">
+                    <Label Content="*" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FFDE0000" Margin="20,0" FontWeight="Bold" Visibility="Hidden"/>
+                    <Label Content="e-mail" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FF00AADE" Margin="20,0"/>
+                </DockPanel>
+                <TextBox x:Name="txt_eMail_new" Text="{Binding Email}" Height="23" VerticalAlignment="Top" TextAlignment="Center" Margin="20,0" MouseLeave="OnMouseCaptureLost" />
+            </StackPanel>
+            <!--- Name -->
+            <StackPanel x:Name="sp_Name" Width="200">
+                <DockPanel x:Name="dp_Name">
+                    <Label Content="*" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FFDE0000" Margin="20,0" FontWeight="Bold" Visibility="Hidden"/>
+                    <Label Content="name" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FF00AADE" Margin="20,0"/>
+                </DockPanel>
+                <TextBox Height="23" Text="{Binding  Name}"  VerticalAlignment="Top" x:Name="txt_name_new" TextAlignment="Center" Margin="20,0" MouseLeave="OnMouseCaptureLost" />
+            </StackPanel>
+            <!--- Second Name -->
+            <StackPanel x:Name="sp_secondName" Width="200" Visibility="Collapsed">
+                <DockPanel x:Name="dp_secondName" >
+                    <Label Content="*" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FFDE0000" Margin="20,0" FontWeight="Bold" Visibility="Hidden"/>
+                    <Label Content="second name" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FF00AADE" Margin="20,0"/>
+                </DockPanel>
+                <TextBox Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" x:Name="txt_secondName_new" TextAlignment="Center" Margin="20,0" MouseLeave="OnMouseCaptureLost" />
+            </StackPanel>
+            <!--- Surname -->
+            <StackPanel x:Name="sp_surname" Width="200">
+                <DockPanel x:Name="dp_surname">
+                    <Label Content="*" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FFDE0000" Margin="20,0" FontWeight="Bold" Visibility="Hidden"/>
+                    <Label Content="surname" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FF00AADE" Margin="20,0"/>
+                </DockPanel>
+                <TextBox Height="23"  Text="{Binding Surname}"  VerticalAlignment="Top" x:Name="txt_surname_new" TextAlignment="Center" Margin="20,0" MouseLeave="OnMouseCaptureLost" />
+            </StackPanel>
+            <!--- Title -->
+            <StackPanel x:Name="sp_title" Width="200" Visibility="Collapsed">
+                <DockPanel x:Name="dp_title" >
+                    <Label Content="*" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FFDE0000" Margin="20,0" FontWeight="Bold" Visibility="Hidden"/>
+                    <Label Content="title" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FF00AADE" Margin="20,0"/>
+                </DockPanel>
+                <TextBox Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" x:Name="txt_title_new" TextAlignment="Center" Margin="20,0" MouseLeave="OnMouseCaptureLost"/>
+            </StackPanel>
+            <!--- Position -->
+            <StackPanel x:Name="sp_position" Width="200" Visibility="Collapsed">
+                <DockPanel x:Name="dp_position">
+                    <Label Content="*" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FFDE0000" Margin="20,0" FontWeight="Bold" Visibility="Hidden"/>
+                    <Label Content="position" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FF00AADE" Margin="20,0"/>
+                </DockPanel>
+                <TextBox Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" x:Name="txt_position_new" TextAlignment="Center" Margin="20,0" MouseLeave="OnMouseCaptureLost"/>
+            </StackPanel>
+            <!--- CardID -->
+            <StackPanel x:Name="sp_cardId" Width="200" Visibility="Collapsed">
+                <DockPanel x:Name="dp_cardId" >
+                    <Label Content="*" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FFDE0000" Margin="20,0" FontWeight="Bold" Visibility="Hidden"/>
+                    <Label Content="card id" FontSize="12" HorizontalContentAlignment="Right" Foreground="#FF00AADE" Margin="20,0"/>
+                </DockPanel>
+                <TextBox Height="23"  TextWrapping="Wrap" Text="" VerticalAlignment="Top" x:Name="txt_cardID_new" TextAlignment="Center" Margin="20,0" MouseLeave="OnMouseCaptureLost"/>
+            </StackPanel>
+
+            <StackPanel x:Name="sp_Submit" Width="400">
+                <!--- Warning Message -->
+                <Label Content="fields should not be empty" FontSize="12" HorizontalContentAlignment="Left" Foreground="#FFDE0000" Margin="20,0,20,0" FontStyle="Italic" x:Name="lbl_WarningMessage" Visibility="Hidden"/>
+                <!--- Submit -->
+                <DockPanel>
+                    <Button x:Name="btn_SaveUser" Content="Update" VerticalAlignment="Top" HorizontalAlignment="Left"  Height="28" Width="160" Margin="20,0" Foreground="#FF00AADE" MouseLeave="OnMouseCaptureLost" Click="Btn_SaveUser_Click"/>
+                    <Button x:Name="btn_CancelUpdate" Content="Cancel" VerticalAlignment="Top" HorizontalAlignment="Right"  Height="28" Width="160"  Margin="20,0" Foreground="#FFDE0000" MouseLeave="OnMouseCaptureLost" Click="Btn_CancelUpdate_Click"/>
+                </DockPanel>
+                <DockPanel Margin="0,10,0,0">
+                    <Button x:Name="btn_DeleteUser" Content="Delete" VerticalAlignment="Top" HorizontalAlignment="Right"  Height="28" Width="160"  Margin="20,0" Foreground="#FFDE0000" MouseLeave="OnMouseCaptureLost" Click="Btn_DeleteUser_Click"/>
+                </DockPanel>
+            </StackPanel>
+        </WrapPanel>
+    </Grid>
+</UserControl>

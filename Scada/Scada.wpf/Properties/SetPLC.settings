@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Scada.wpf.Properties" GeneratedClassName="SetPLC">
+  <Profiles />
+  <Settings>
+    <Setting Name="Profinet_CpuRock" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Profinet_Slot" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Profinet_IP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">192.168.5.10</Value>
+    </Setting>
+    <Setting Name="Profinet_TimeOut" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="Profinet_Interval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="Profinet_DeviceName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Siemens S7 1200</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

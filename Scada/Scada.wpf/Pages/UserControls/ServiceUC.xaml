@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="Scada.wpf.Pages.UserControls.ServiceUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Scada.wpf.Pages.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="UniformToFill" ImageSource="/Scada.wpf;component/Assets/img/samples/abstract2.png" Opacity="0.25"/>
+        </Grid.Background>
+        <Label Content="Service" HorizontalAlignment="Left" Margin="28,26,0,0" VerticalAlignment="Top" FontSize="48" FontWeight="Bold" Foreground="#FF6FB925"/>
+    </Grid>
+</UserControl>
